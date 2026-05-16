@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wassila Amoura — Formatrice & UX/Product Consultant</title>
+  <title>Wassila Amoura — Formatrice & UX/UI Développeuse</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -471,7 +471,7 @@
 
     .work-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 1px;
       background: var(--line);
       border: 1px solid var(--line);
@@ -480,7 +480,15 @@
     }
 
     /* featured card spans full width */
-    .wc-featured { grid-column: 1 / -1; }
+    .wc-featured { grid-column: auto; }
+    
+    .wc-featured .wc-visual { height: 260px; }
+    .wc-featured .wc-body {
+      display: block;
+      border-top: 1px solid var(--line);
+    }
+
+    .work-card:not(.wc-featured) .wc-visual { height: 260px; }
 
     .work-card {
       background: var(--card);
@@ -499,21 +507,22 @@
       overflow: hidden;
     }
 
-    .wc-featured .wc-visual { height: 260px; }
-    .wc-featured .wc-body   {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border-top: 1px solid var(--line);
-    }
-
-    .work-card:not(.wc-featured) .wc-visual { height: 220px; }
-
     .wc-visual-inner {
       width: 100%; height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 30px;
+      gap: 20px;
       transition: transform .6s var(--ease);
+    }
+
+    .wc-visual-inner img {
+      max-width: 90%;
+      max-height: 90%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
     }
 
     .work-card:hover .wc-visual-inner { transform: scale(1.04); }
@@ -619,6 +628,19 @@
       color: var(--gray);
       letter-spacing: .03em;
     }
+
+    .wc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .68rem;
+      color: var(--rose);
+      text-decoration: none;
+      margin-top: 1rem;
+      transition: gap .25s ease;
+    }
+
+    .wc-link:hover { gap: .7rem; }
 
     .wc-arrow {
       position: absolute;
@@ -853,7 +875,8 @@
       .work-grid { grid-template-columns: 1fr; }
       .wc-featured .wc-body { grid-template-columns: 1fr; }
       .wc-featured .wc-section { border-right: none; border-bottom: 1px solid var(--line); }
-      .wc-featured .wc-visual { height: 200px; }
+      .wc-featured .wc-visual { height: 240px; }
+      .work-card:not(.wc-featured) .wc-visual { height: 240px; }
 
       .srv-grid { grid-template-columns: 1fr; }
 
@@ -868,8 +891,9 @@
 
     @media (max-width: 1024px) and (min-width: 769px) {
       .srv-grid  { grid-template-columns: repeat(2, 1fr); }
-      .work-grid { grid-template-columns: 1fr; }
-      .wc-featured .wc-visual { height: 220px; }
+      .work-grid { grid-template-columns: repeat(2, 1fr); }
+      .wc-featured .wc-visual { height: 280px; }
+      .work-card:not(.wc-featured) .wc-visual { height: 280px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -896,8 +920,8 @@
   <nav id="nav">
     <a class="nav-logo" href="#hero">WA — Wassila Amoura</a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#work">Work</a></li>
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#work">Projets</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -907,13 +931,13 @@
   <section id="hero">
     <div class="hero-content container" style="max-width:1100px;">
 
-      <p class="hero-eyebrow">UX/Product · Community Tech · Formation</p>
+      <p class="hero-eyebrow">Design UX/UI · Développement Web · Formation</p>
 
       <div class="hero-title">
         <h1>
           <span class="line-clip"><span>Formatrice</span></span>
-          <span class="line-clip"><span>&amp; <span class="accent">Consultant</span></span></span>
-          <span class="line-clip"><span>UX/Product.</span></span>
+          <span class="line-clip"><span>&amp; <span class="accent">Développeuse</span></span></span>
+          <span class="line-clip"><span>Design UX/UI.</span></span>
         </h1>
       </div>
 
@@ -924,7 +948,7 @@
       </p>
 
       <div class="hero-actions">
-        <a href="#contact" class="btn btn-primary">Let's Talk →</a>
+        <a href="#contact" class="btn btn-primary">Parlons ensemble →</a>
         <a href="#work"    class="btn btn-ghost">See my work</a>
       </div>
     </div>
@@ -938,27 +962,27 @@
   <!-- ═══ MARQUEE ══════════════════════════════════════════════════════════ -->
   <div class="marquee-wrap">
     <div class="marquee-track">
-      <span class="m-item"><span class="m-dot"></span>UX Design</span>
+      <span class="m-item"><span class="m-dot"></span>Design UX/UI</span>
       <span class="m-item"><span class="m-dot"></span>Formations</span>
-      <span class="m-item"><span class="m-dot"></span>Community Tech</span>
       <span class="m-item"><span class="m-dot"></span>React Native</span>
       <span class="m-item"><span class="m-dot"></span>Figma</span>
-      <span class="m-item"><span class="m-dot"></span>Product Strategy</span>
+      <span class="m-item"><span class="m-dot"></span>Softr.io</span>
+      <span class="m-item"><span class="m-dot"></span>Airtable</span>      
       <span class="m-item"><span class="m-dot"></span>RGPD</span>
       <span class="m-item"><span class="m-dot"></span>Accessibilité</span>
-      <span class="m-item"><span class="m-dot"></span>Design System</span>
-      <span class="m-item"><span class="m-dot"></span>Sports Tech</span>
+      <span class="m-item"><span class="m-dot"></span>Design System</span>      
+      <span class="m-item"><span class="m-dot"></span>Github</span>      
       <!-- duplicate for seamless loop -->
-      <span class="m-item"><span class="m-dot"></span>UX Design</span>
-      <span class="m-item"><span class="m-dot"></span>Formations</span>
-      <span class="m-item"><span class="m-dot"></span>Community Tech</span>
+      <span class="m-item"><span class="m-dot"></span>Design UX/UI</span>
+      <span class="m-item"><span class="m-dot"></span>Formations</span>      
       <span class="m-item"><span class="m-dot"></span>React Native</span>
       <span class="m-item"><span class="m-dot"></span>Figma</span>
-      <span class="m-item"><span class="m-dot"></span>Product Strategy</span>
-      <span class="m-item"><span class="m-dot"></span>RGPD</span>
+      <span class="m-item"><span class="m-dot"></span>Softr.io</span>
+      <span class="m-item"><span class="m-dot"></span>Airtable</span>
+           <span class="m-item"><span class="m-dot"></span>RGPD</span>
       <span class="m-item"><span class="m-dot"></span>Accessibilité</span>
       <span class="m-item"><span class="m-dot"></span>Design System</span>
-      <span class="m-item"><span class="m-dot"></span>Sports Tech</span>
+      <span class="m-item"><span class="m-dot"></span>Github</span>    
     </div>
   </div>
 
@@ -974,7 +998,7 @@
       <div class="about-grid">
         <div class="reveal from-left">
           <p class="about-statement">
-            Je crée des formations <em>UX/UI&nbsp;&amp;&nbsp;Web</em> et conseille des startups en <em>community&nbsp;tech</em>.
+            Je crée des formations <em>UX/UI&nbsp;&amp;&nbsp;Web</em> de qualité pour tous profils.
           </p>
 
           <div class="about-stats stagger">
@@ -995,12 +1019,12 @@
 
         <div class="about-body reveal from-right">
           <p>
-            Fondatrice &amp; Product Designer, j'ai co-conçu <strong>Hitting</strong> de A à Z — de la stratégie produit au Design System 40+ composants, jusqu'au déploiement React Native en production.
+            Designeuse UX/UI &amp; Développeuse Front-End, j'ai travaillé sur des projets variés : développement d'applications (Hitting en React Native), design de sites Figma, et conception d'apps iOS.
           </p>
           <p>
-            En parallèle, je forme des équipes à l'UX, à l'accessibilité RGAA et au responsive design. Mon approche : pédagogie accessible, design rigoureux, vision produit.
+            Ma spécialité : créer des formations accessibles et engageantes en Design UX/UI, Développement Web, et Accessibilité. Je crois que la pédagogie rigoureuse peut transformer des carrières.
           </p>
-          <p>Organisme de formation enregistré. Disponible pour consulting.</p>
+          <p>Organisme de formation enregistré n° 11931240793. Formations en design thinking, accessibilité RGAA, responsive design, et bien plus.</p>
           <a href="#work" class="btn btn-ghost" style="margin-top:1.75rem;">Voir mes projets →</a>
         </div>
       </div>
@@ -1022,197 +1046,93 @@
       <div class="work-grid reveal scale-in">
 
         <!-- ── HITTING — featured wide ──────────────────────────────── -->
-        <div class="work-card wc-featured">
+        <a href="https://www.figma.com/design/your-hitting-figma-link" target="_blank" rel="noopener" class="work-card wc-featured">
           <div class="wc-visual hitting-bg">
             <div class="wc-visual-inner">
-              <div class="orb" style="width:220px;height:220px;background:rgba(255,215,232,.07);top:-60px;left:8%;"></div>
-              <div class="orb" style="width:160px;height:160px;background:rgba(168,216,216,.06);bottom:-40px;right:12%;"></div>
-              <svg viewBox="0 0 680 270" width="680" height="270" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- phone left -->
-                <rect x="185" y="38" width="72" height="134" rx="13" fill="rgba(255,215,232,.05)" stroke="rgba(255,215,232,.22)" stroke-width="1.5"/>
-                <rect x="199" y="56" width="44" height="70" rx="5" fill="rgba(255,215,232,.04)" stroke="rgba(255,215,232,.1)" stroke-width="1"/>
-                <rect x="199" y="134" width="24" height="5" rx="2.5" fill="rgba(255,215,232,.18)"/>
-                <rect x="227" y="134" width="16" height="5" rx="2.5" fill="rgba(255,215,232,.09)"/>
-                <rect x="207" y="44" width="26" height="4" rx="2" fill="rgba(255,215,232,.14)"/>
-                <!-- phone centre (hero) -->
-                <rect x="274" y="18" width="82" height="158" rx="14" fill="rgba(255,215,232,.09)" stroke="rgba(255,215,232,.38)" stroke-width="1.5"/>
-                <rect x="289" y="37" width="52" height="88" rx="6" fill="rgba(255,215,232,.05)" stroke="rgba(255,215,232,.14)" stroke-width="1"/>
-                <!-- status bar dots inside -->
-                <circle cx="295" cy="44" r="3" fill="rgba(255,215,232,.2)"/>
-                <rect x="289" y="133" width="26" height="5" rx="2.5" fill="rgba(255,215,232,.24)"/>
-                <rect x="319" y="133" width="22" height="5" rx="2.5" fill="rgba(255,215,232,.11)"/>
-                <rect x="305" y="25" width="28" height="4" rx="2" fill="rgba(255,215,232,.2)"/>
-                <!-- mini UI rows inside phone -->
-                <rect x="292" y="52" width="42" height="16" rx="3" fill="rgba(255,215,232,.06)"/>
-                <rect x="292" y="72" width="30" height="5" rx="2.5" fill="rgba(255,215,232,.1)"/>
-                <rect x="292" y="82" width="42" height="5" rx="2.5" fill="rgba(255,215,232,.06)"/>
-                <rect x="292" y="96" width="42" height="16" rx="3" fill="rgba(255,215,232,.04)" stroke="rgba(255,215,232,.08)" stroke-width="1"/>
-                <rect x="292" y="116" width="28" height="5" rx="2.5" fill="rgba(255,215,232,.07)"/>
-                <!-- phone right -->
-                <rect x="374" y="38" width="72" height="134" rx="13" fill="rgba(168,216,216,.05)" stroke="rgba(168,216,216,.22)" stroke-width="1.5"/>
-                <rect x="388" y="56" width="44" height="70" rx="5" fill="rgba(168,216,216,.04)" stroke="rgba(168,216,216,.1)" stroke-width="1"/>
-                <rect x="388" y="134" width="24" height="5" rx="2.5" fill="rgba(168,216,216,.18)"/>
-                <rect x="416" y="134" width="16" height="5" rx="2.5" fill="rgba(168,216,216,.09)"/>
-                <rect x="396" y="44" width="26" height="4" rx="2" fill="rgba(168,216,216,.14)"/>
-                <!-- decorative rings -->
-                <circle cx="130" cy="90"  r="32" stroke="rgba(255,215,232,.07)" stroke-width="1" fill="none"/>
-                <circle cx="130" cy="90"  r="18" stroke="rgba(255,215,232,.04)" stroke-width="1" fill="none"/>
-                <circle cx="510" cy="165" r="42" stroke="rgba(168,216,216,.07)" stroke-width="1" fill="none"/>
-                <!-- labels -->
-                <text x="142" y="220" font-family="monospace" font-size="9.5" fill="rgba(255,215,232,.22)">Design System · 40+ components</text>
-                <text x="360" y="244" font-family="monospace" font-size="9.5" fill="rgba(168,216,216,.22)">React Native · Firebase Auth · RGPD</text>
-              </svg>
+              
+              <img src="HittingCover.webp" alt="Hitting App Mockup" >
             </div>
           </div>
 
           <div class="wc-body">
             <div class="wc-section" style="position:relative;">
               <div class="wc-arrow">↗</div>
-              <div class="wc-cats">Product Design &nbsp;·&nbsp; Design System &nbsp;·&nbsp; Full-Stack</div>
+              <div class="wc-cats">Développement Mobile &nbsp;·&nbsp; Design UX/UI &nbsp;·&nbsp; React Native</div>
               <div class="wc-title">Hitting</div>
-              <div class="wc-sub">Mobile App for Boxing Clubs</div>
-              <div class="wc-role">Founder &amp; Product Designer</div>
-              <p class="wc-desc">Native iOS &amp; Android app helping boxing clubs organize interclub fights — from strategy to production.</p>
+              <div class="wc-sub">Plateforme de matching pour clubs de boxe</div>
+              <div class="wc-role">Designeuse UX/UI & Développeuse</div>
+              <p class="wc-desc">Application mobile (iOS & Android) permettant aux clubs de boxe de trouver des boxeurs compatibles (âge, sexe, catégorie de poids) pour des galas et sparrings. V1 développée sur Softr.io + Airtable. V2 PWA en React Native, Firebase et Airtable en cours.</p>
+              <p style="font-size:.84rem;color:var(--gray);margin-bottom:1rem;line-height:1.65;"><strong style="color:var(--white);">Contributions :</strong> Développement V1 (Softr, Airtable), design et développement V2 (React Native, Firebase), optimisations UX et accessibilité.</p>
             </div>
             <div class="wc-section">
-              <div class="wc-tag" style="margin-bottom:.85rem;">Key Results</div>
+              <div class="wc-tag" style="margin-bottom:.85rem;">Résultats clés</div>
               <div class="wc-chips">
-                <span class="chip">40+ component DS</span>
+                <span class="chip">Softr.io & Airtable</span>
                 <span class="chip">React Native v2</span>
-                <span class="chip">RGPD compliant</span>
-                <span class="chip">Firebase Auth</span>
-                <span class="chip">5 UX cycles</span>
-                <span class="chip">Live in production</span>
+                <span class="chip">Authentification Firebase</span>
+                <span class="chip">Design UX</span>
+                <span class="chip">Algorithme de matching</span>
+                <span class="chip">Accessibilité</span>
               </div>
+              <a href="https://www.figma.com/design/your-hitting-figma" target="_blank" rel="noopener" class="wc-link">
+                Voir le design →
+              </a>
             </div>
           </div>
-        </div>
+        </a>
 
         <!-- ── AMOKI ÉDITIONS ─────────────────────────────────────────── -->
-        <div class="work-card" style="position:relative;">
+        <a href="https://www.figma.com/design/8WkIwOBXgCKiMiDE06mGAY/Amoki?node-id=347-1306" target="_blank" rel="noopener" class="work-card" style="position:relative;">
           <div class="wc-visual amoki-bg">
             <div class="wc-visual-inner">
-              <div class="orb" style="width:150px;height:150px;background:rgba(255,200,120,.06);top:-30px;right:-10px;"></div>
-              <svg viewBox="0 0 380 220" width="360" height="210" fill="none">
-                <!-- design system grid header -->
-                <rect x="30" y="25" width="320" height="16" rx="3" fill="rgba(255,200,120,.06)" stroke="rgba(255,200,120,.15)" stroke-width="1"/>
-                <rect x="38" y="30" width="40" height="6" rx="3" fill="rgba(255,200,120,.2)"/>
-                <rect x="86" y="30" width="60" height="6" rx="3" fill="rgba(255,200,120,.1)"/>
-                <rect x="154" y="30" width="50" height="6" rx="3" fill="rgba(255,200,120,.08)"/>
-                <!-- component cards row 1 -->
-                <rect x="30"  y="50" width="92" height="60" rx="5" fill="rgba(255,200,120,.05)" stroke="rgba(255,200,120,.14)" stroke-width="1"/>
-                <rect x="130" y="50" width="92" height="60" rx="5" fill="rgba(255,200,120,.05)" stroke="rgba(255,200,120,.14)" stroke-width="1"/>
-                <rect x="230" y="50" width="120" height="60" rx="5" fill="rgba(255,200,120,.08)" stroke="rgba(255,200,120,.2)" stroke-width="1"/>
-                <!-- component card interiors -->
-                <rect x="38"  y="60" width="76" height="22" rx="3" fill="rgba(255,200,120,.08)"/>
-                <rect x="38"  y="88" width="50" height="5"  rx="2.5" fill="rgba(255,200,120,.12)"/>
-                <rect x="138" y="60" width="76" height="22" rx="3" fill="rgba(255,200,120,.06)"/>
-                <rect x="138" y="88" width="60" height="5"  rx="2.5" fill="rgba(255,200,120,.1)"/>
-                <!-- highlighted component (right) -->
-                <rect x="238" y="58" width="104" height="26" rx="4" fill="rgba(255,200,120,.12)"/>
-                <rect x="238" y="90" width="70"  height="5"  rx="2.5" fill="rgba(255,200,120,.2)"/>
-                <rect x="238" y="100" width="50" height="5"  rx="2.5" fill="rgba(255,200,120,.12)"/>
-                <!-- wireframe row below -->
-                <rect x="30"  y="122" width="150" height="72" rx="5" fill="rgba(255,200,120,.03)" stroke="rgba(255,200,120,.1)" stroke-width="1"/>
-                <rect x="38"  y="130" width="80"  height="8"  rx="2" fill="rgba(255,200,120,.1)"/>
-                <rect x="38"  y="145" width="134" height="5"  rx="2.5" fill="rgba(255,200,120,.06)"/>
-                <rect x="38"  y="155" width="100" height="5"  rx="2.5" fill="rgba(255,200,120,.05)"/>
-                <rect x="38"  y="165" width="120" height="5"  rx="2.5" fill="rgba(255,200,120,.04)"/>
-                <rect x="38"  y="180" width="50"  height="8"  rx="3" fill="rgba(255,200,120,.12)" stroke="rgba(255,200,120,.2)" stroke-width="1"/>
-                <!-- prototype mockup right -->
-                <rect x="192" y="122" width="158" height="72" rx="5" fill="rgba(255,200,120,.04)" stroke="rgba(255,200,120,.12)" stroke-width="1"/>
-                <rect x="200" y="130" width="40"  height="40" rx="4" fill="rgba(255,200,120,.06)"/>
-                <rect x="248" y="132" width="90"  height="6"  rx="2.5" fill="rgba(255,200,120,.12)"/>
-                <rect x="248" y="144" width="70"  height="5"  rx="2.5" fill="rgba(255,200,120,.07)"/>
-                <rect x="248" y="154" width="80"  height="5"  rx="2.5" fill="rgba(255,200,120,.06)"/>
-                <rect x="200" y="176" width="60"  height="10" rx="3" fill="rgba(255,200,120,.08)"/>
-                <text x="35" y="212" font-family="monospace" font-size="8.5" fill="rgba(255,200,120,.3)">15 wireframes · 8 prototypes interactifs</text>
-              </svg>
+              
+              <img src="MockupAmoki.png" alt="Amoki App Mockup" >
             </div>
           </div>
           <div class="wc-body" style="position:relative;">
             <div class="wc-arrow">↗</div>
-            <div class="wc-cats">Design System &nbsp;·&nbsp; Wireframing &nbsp;·&nbsp; UX</div>
-            <div class="wc-title">Amoki Éditions</div>
-            <div class="wc-sub">Design System &amp; Wireframes</div>
-            <div class="wc-role">UX/UI Designer</div>
-            <p class="wc-desc">Design system and wireframes for a publishing platform — 15 wireframes, 8 interactive prototypes, subvention obtained.</p>
+            <div class="wc-cats">App Mobile &nbsp;·&nbsp; Design UX/UI &nbsp;·&nbsp; Prototype</div>
+            <div class="wc-title">Amoki</div>
+            <div class="wc-sub">App iOS pour lire des livres audios</div>
+            <div class="wc-role">Designeuse UX/UI</div>
+            <p class="wc-desc">Application iOS permettant de lire et d'écouter des livres audios. Conception Figma complète avec interface intuitive pour enfants et parents, navigation simple, lecteur audio optimisé.</p>
             <div class="wc-chips">
-              <span class="chip">15 wireframes</span>
-              <span class="chip">8 prototypes</span>
-              <span class="chip">Subvention ✓</span>
+              <span class="chip">Design Figma</span>
+              <span class="chip">App iOS</span>
+              <span class="chip">Interface Intuitive</span>
             </div>
+            <a href="https://www.figma.com/design/8WkIwOBXgCKiMiDE06mGAY/Amoki" target="_blank" rel="noopener" class="wc-link">
+              Voir le design →
+            </a>
           </div>
-        </div>
+        </a>
 
         <!-- ── GIGRH ──────────────────────────────────────────────────── -->
-        <div class="work-card" style="position:relative;">
+        <a href="https://www.figma.com/design/cIOMEtv4sQZdzsE5dJZWNA/Design-system-Gigi-rh?node-id=7-11" target="_blank" rel="noopener" class="work-card" style="position:relative;">
           <div class="wc-visual gigrh-bg">
             <div class="wc-visual-inner">
-              <div class="orb" style="width:140px;height:140px;background:rgba(168,216,216,.08);bottom:-20px;right:-10px;"></div>
-              <svg viewBox="0 0 380 220" width="360" height="210" fill="none">
-                <!-- browser chrome -->
-                <rect x="25" y="22" width="330" height="176" rx="8" fill="rgba(168,216,216,.03)" stroke="rgba(168,216,216,.15)" stroke-width="1.5"/>
-                <rect x="25" y="22" width="330" height="28" rx="8" fill="rgba(168,216,216,.07)"/>
-                <circle cx="42" cy="36" r="5" fill="rgba(168,216,216,.3)"/>
-                <circle cx="57" cy="36" r="5" fill="rgba(168,216,216,.15)"/>
-                <circle cx="72" cy="36" r="5" fill="rgba(168,216,216,.08)"/>
-                <rect x="90" y="29" width="180" height="14" rx="4" fill="rgba(168,216,216,.06)"/>
-                <!-- sidebar -->
-                <rect x="25" y="50" width="64" height="148" rx="0" fill="rgba(168,216,216,.04)" stroke="none"/>
-                <rect x="33" y="62" width="48" height="8"  rx="2" fill="rgba(168,216,216,.15)"/>
-                <rect x="33" y="76" width="40" height="6"  rx="2" fill="rgba(168,216,216,.08)"/>
-                <rect x="33" y="88" width="44" height="6"  rx="2" fill="rgba(168,216,216,.06)"/>
-                <rect x="33" y="100" width="36" height="6" rx="2" fill="rgba(168,216,216,.06)"/>
-                <rect x="33" y="112" width="42" height="6" rx="2" fill="rgba(168,216,216,.05)"/>
-                <!-- main content area -->
-                <!-- table header -->
-                <rect x="97" y="58" width="250" height="20" rx="3" fill="rgba(168,216,216,.06)"/>
-                <rect x="104" y="64" width="50" height="6" rx="2" fill="rgba(168,216,216,.2)"/>
-                <rect x="180" y="64" width="40" height="6" rx="2" fill="rgba(168,216,216,.12)"/>
-                <rect x="250" y="64" width="50" height="6" rx="2" fill="rgba(168,216,216,.12)"/>
-                <!-- table rows -->
-                <rect x="97" y="84"  width="250" height="18" rx="2" fill="rgba(168,216,216,.03)" stroke="rgba(168,216,216,.06)" stroke-width=".5"/>
-                <circle cx="112" cy="93" r="6" fill="rgba(168,216,216,.12)"/>
-                <rect x="124" y="90" width="50" height="5" rx="2" fill="rgba(168,216,216,.12)"/>
-                <rect x="180" y="90" width="40" height="5" rx="2" fill="rgba(168,216,216,.08)"/>
-                <rect x="250" y="89" width="36" height="7" rx="3" fill="rgba(168,216,216,.12)"/>
-
-                <rect x="97" y="108" width="250" height="18" rx="2" fill="rgba(168,216,216,.04)" stroke="rgba(168,216,216,.06)" stroke-width=".5"/>
-                <circle cx="112" cy="117" r="6" fill="rgba(168,216,216,.1)"/>
-                <rect x="124" y="114" width="44" height="5" rx="2" fill="rgba(168,216,216,.1)"/>
-                <rect x="180" y="114" width="48" height="5" rx="2" fill="rgba(168,216,216,.07)"/>
-                <rect x="250" y="113" width="36" height="7" rx="3" fill="rgba(168,216,216,.08)"/>
-
-                <rect x="97" y="132" width="250" height="18" rx="2" fill="rgba(168,216,216,.03)" stroke="rgba(168,216,216,.06)" stroke-width=".5"/>
-                <circle cx="112" cy="141" r="6" fill="rgba(168,216,216,.08)"/>
-                <rect x="124" y="138" width="58" height="5" rx="2" fill="rgba(168,216,216,.08)"/>
-                <rect x="180" y="138" width="36" height="5" rx="2" fill="rgba(168,216,216,.06)"/>
-                <rect x="250" y="137" width="36" height="7" rx="3" fill="rgba(168,216,216,.12)"/>
-
-                <rect x="97" y="156" width="250" height="18" rx="2" fill="rgba(168,216,216,.02)" stroke="rgba(168,216,216,.05)" stroke-width=".5"/>
-                <circle cx="112" cy="165" r="6" fill="rgba(168,216,216,.07)"/>
-                <rect x="124" y="162" width="46" height="5" rx="2" fill="rgba(168,216,216,.07)"/>
-                <rect x="180" y="162" width="52" height="5" rx="2" fill="rgba(168,216,216,.05)"/>
-                <rect x="250" y="161" width="36" height="7" rx="3" fill="rgba(168,216,216,.1)"/>
-                <text x="30" y="210" font-family="monospace" font-size="8.5" fill="rgba(168,216,216,.3)">Figma Design · Built &amp; Deployed · Accessibility</text>
-              </svg>
+              
+              <img src="GigiRhCover.png" alt="GigiRH Design Web Mockup" >
             </div>
           </div>
           <div class="wc-body" style="position:relative;">
             <div class="wc-arrow">↗</div>
-            <div class="wc-cats">UX/UI Design &nbsp;·&nbsp; Front-End Development</div>
+            <div class="wc-cats">Design Web &nbsp;·&nbsp; Design UX/UI &nbsp;·&nbsp; Figma</div>
             <div class="wc-title">GigiRH</div>
-            <div class="wc-sub">HR Platform Redesign</div>
-            <div class="wc-role">UX/UI Designer &amp; Developer</div>
-            <p class="wc-desc">Complete redesign and development of an HR management platform — from Figma mockups to live deployment.</p>
+            <div class="wc-sub">Site web pour autoentrepreneuse RH</div>
+            <div class="wc-role">Designeuse UX/UI</div>
+            <p class="wc-desc">Design web complet sur Figma pour une autoentrepreneuse RH. Conception d'une identité visuelle cohérente, architecture d'information claire, pages produits et services, optimisation UX pour conversion.</p>
             <div class="wc-chips">
-              <span class="chip">Figma → Wix</span>
-              <span class="chip">Deployed</span>
-              <span class="chip">Accessibility</span>
+              <span class="chip">Design Figma</span>
+              <span class="chip">Design Web</span>
+              <span class="chip">Responsive</span>
+              <span class="chip">Axé UX</span>
             </div>
+            <a href="https://www.figma.com/design/cIOMEtv4sQZdzsE5dJZWNA/Design-system-Gigi-rh" target="_blank" rel="noopener" class="wc-link">
+              Voir le design →
+            </a>
           </div>
-        </div>
+        </a>
 
       </div><!-- /work-grid -->
     </div>
@@ -1233,36 +1153,41 @@
         <div class="srv-card c-rose">
           <div class="srv-ico rose">🎓</div>
           <div class="srv-title">Formations UX &amp; Web</div>
-          <p class="srv-desc">Conception et animation de formations UX/UI &amp; Web pour tous profils. Organisme de formation enregistré. Pédagogie accessible, résultats concrets.</p>
+          <p class="srv-desc">Conception et animation de formations UX/UI &amp; Web pour tous profils. Organisme de formation enregistré (n° 11931240793). 20+ formations livrées, 200+ apprenants formés, 100% de satisfaction.</p>
           <div class="srv-tags">
             <span class="srv-tag">Design Thinking</span>
             <span class="srv-tag">UX Research</span>
-            <span class="srv-tag">Accessibilité</span>
-            <span class="srv-tag">RGAA</span>
+            <span class="srv-tag">Accessibilité RGAA</span>
+            <span class="srv-tag">Responsive Design</span>
+            <span class="srv-tag">Pédagogie</span>
           </div>
         </div>
 
         <div class="srv-card c-blue">
           <div class="srv-ico blue">⚡</div>
-          <div class="srv-title">Product Design &amp; Consulting</div>
-          <p class="srv-desc">Accompagnement de la stratégie produit au déploiement. UX research, prototypage Figma, itérations utilisateurs, implémentation React Native.</p>
+          <div class="srv-title">Development &amp; Design Web</div>
+          <p class="srv-desc">Développement mobile (React Native, iOS), design web sur Figma, optimisation UX. Applications, sites web, avec focus sur accessibilité et expérience utilisateur.</p>
           <div class="srv-tags">
-            <span class="srv-tag">Figma</span>
             <span class="srv-tag">React Native</span>
-            <span class="srv-tag">Stratégie produit</span>
-            <span class="srv-tag">RGPD</span>
+            <span class="srv-tag">Figma</span>
+            <span class="srv-tag">Softr.io</span>
+            <span class="srv-tag">Airtable</span>
+            <span class="srv-tag">iOS</span>
+            <span class="srv-tag">Design Web</span>
+            <span class="srv-tag">Firebase</span>
           </div>
         </div>
 
         <div class="srv-card c-white">
           <div class="srv-ico white">🧩</div>
-          <div class="srv-title">Design Systems &amp; Accessibility</div>
-          <p class="srv-desc">Construction de Design Systems robustes (Auto Layout, Variants, Tokens Studio) et audits accessibilité pour interfaces inclusives et scalables.</p>
+          <div class="srv-title">Design Systems &amp; Accessibilité</div>
+          <p class="srv-desc">Construction de Design Systems robustes (Auto Layout, Variants, Tokens Studio) et audits accessibilité WCAG pour interfaces inclusives et scalables.</p>
           <div class="srv-tags">
             <span class="srv-tag">Design System</span>
             <span class="srv-tag">Tokens Studio</span>
             <span class="srv-tag">WCAG</span>
             <span class="srv-tag">Audit UX</span>
+            <span class="srv-tag">Figma</span>
           </div>
         </div>
       </div>
@@ -1286,19 +1211,19 @@
           <p class="contact-sub">
             Un projet de formation, une app à concevoir, un Design System à construire ?<br>Je réponds rapidement, sans jargon.
           </p>
-          <a href="mailto:wassila@example.com" class="btn btn-primary">Envoyer un message →</a>
+          <a href="mailto:wassilaamoura8@gmail.com" class="btn btn-primary">Envoyer un message →</a>
         </div>
 
         <div class="reveal from-right">
           <div class="contact-panel">
-            <a href="mailto:wassila@example.com" class="cp-row">
+            <a href="mailto:wassilaamoura8@gmail.com" class="cp-row">
               <div>
                 <div class="cp-label">Email</div>
-                <div class="cp-value">wassila@example.com</div>
+                <div class="cp-value">wassilaamoura8@gmail.com</div>
               </div>
               <span class="cp-arrow">↗</span>
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener" class="cp-row">
+            <a href="https://linkedin.com/in/wassila-amoura" target="_blank" rel="noopener" class="cp-row">
               <div>
                 <div class="cp-label">LinkedIn</div>
                 <div class="cp-value">Wassila Amoura</div>
@@ -1321,7 +1246,7 @@
   <!-- FOOTER -->
   <footer>
     <span>© 2025 Wassila Amoura</span>
-    <span>Formatrice<span class="footer-dot">✦</span>UX/Product Consultant<span class="footer-dot">✦</span>Community Tech</span>
+    <span>Formatrice<span class="footer-dot">✦</span>Développeuse<span class="footer-dot">✦</span>Design UX/UI</span>
     <span>Made with care</span>
   </footer>
 
@@ -1353,7 +1278,7 @@
 
       /* hover state on interactive elements */
       const hoverEls = document.querySelectorAll(
-        '.work-card, .srv-card, .btn, .cp-row, .nav-links a, .nav-logo'
+        '.work-card, .srv-card, .btn, .cp-row, .nav-links a, .nav-logo, .wc-link'
       );
       hoverEls.forEach(el => {
         el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
