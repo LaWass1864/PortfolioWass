@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wassila Amoura — Formatrice & UX/UI Développeuse</title>
+  <title>Wassila Amoura — Formatrice & UX/UI Developer</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -479,16 +479,24 @@
       overflow: hidden;
     }
 
-    /* featured card spans full width */
-    .wc-featured { grid-column: auto; }
+    .work-card {
+      display: flex;
+      flex-direction: column;
+    }
     
-    .wc-featured .wc-visual { height: 260px; }
-    .wc-featured .wc-body {
-      display: block;
-      border-top: 1px solid var(--line);
+    .work-card .wc-visual { 
+      height: 280px;
     }
 
-    .work-card:not(.wc-featured) .wc-visual { height: 260px; }
+    .work-card .wc-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wc-link {
+      margin-top: auto;
+    }
 
     .work-card {
       background: var(--card);
@@ -577,7 +585,13 @@
     }
 
     /* wc-body text area */
-    .wc-body { padding: 1.75rem 2rem; border-top: 1px solid var(--line); }
+    .wc-body { 
+      padding: 1.75rem 2rem; 
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      min-height: auto;
+    }
 
     .wc-featured .wc-section {
       padding: 2rem 2.5rem;
@@ -636,7 +650,7 @@
       font-size: .68rem;
       color: var(--rose);
       text-decoration: none;
-      margin-top: 1rem;
+      margin-top: auto;
       transition: gap .25s ease;
     }
 
@@ -872,16 +886,13 @@
       .about-grid  { grid-template-columns: 1fr; gap: 3rem; }
       .about-stats { grid-template-columns: repeat(3, 1fr); }
 
-      .work-grid { grid-template-columns: 1fr; }
-      .wc-featured .wc-body { grid-template-columns: 1fr; }
-      .wc-featured .wc-section { border-right: none; border-bottom: 1px solid var(--line); }
-      .wc-featured .wc-visual { height: 240px; }
-      .work-card:not(.wc-featured) .wc-visual { height: 240px; }
+      .work-grid { 
+        grid-template-columns: 1fr;
+      }
+      .work-card .wc-visual { height: 240px; }
 
       .srv-grid { grid-template-columns: 1fr; }
-
       .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-
       footer { flex-direction: column; gap: .5rem; text-align: center; }
 
       #cur-dot, #cur-ring { display: none; }
@@ -891,9 +902,10 @@
 
     @media (max-width: 1024px) and (min-width: 769px) {
       .srv-grid  { grid-template-columns: repeat(2, 1fr); }
-      .work-grid { grid-template-columns: repeat(2, 1fr); }
-      .wc-featured .wc-visual { height: 280px; }
-      .work-card:not(.wc-featured) .wc-visual { height: 280px; }
+      .work-grid { 
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .work-card .wc-visual { height: 240px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -936,7 +948,7 @@
       <div class="hero-title">
         <h1>
           <span class="line-clip"><span>Formatrice</span></span>
-          <span class="line-clip"><span>&amp; <span class="accent">Développeuse</span></span></span>
+          <span class="line-clip"><span>&amp; <span class="accent">Développeuse front-end</span></span></span>
           <span class="line-clip"><span>Design UX/UI.</span></span>
         </h1>
       </div>
@@ -962,27 +974,31 @@
   <!-- ═══ MARQUEE ══════════════════════════════════════════════════════════ -->
   <div class="marquee-wrap">
     <div class="marquee-track">
-      <span class="m-item"><span class="m-dot"></span>Design UX/UI</span>
+      <span class="m-item"><span class="m-dot"></span>Design UX</span>
       <span class="m-item"><span class="m-dot"></span>Formations</span>
-      <span class="m-item"><span class="m-dot"></span>React Native</span>
-      <span class="m-item"><span class="m-dot"></span>Figma</span>
-      <span class="m-item"><span class="m-dot"></span>Softr.io</span>
-      <span class="m-item"><span class="m-dot"></span>Airtable</span>      
-      <span class="m-item"><span class="m-dot"></span>RGPD</span>
-      <span class="m-item"><span class="m-dot"></span>Accessibilité</span>
-      <span class="m-item"><span class="m-dot"></span>Design System</span>      
-      <span class="m-item"><span class="m-dot"></span>Github</span>      
-      <!-- duplicate for seamless loop -->
-      <span class="m-item"><span class="m-dot"></span>Design UX/UI</span>
-      <span class="m-item"><span class="m-dot"></span>Formations</span>      
+      <span class="m-item"><span class="m-dot"></span>Community Tech</span>
       <span class="m-item"><span class="m-dot"></span>React Native</span>
       <span class="m-item"><span class="m-dot"></span>Figma</span>
       <span class="m-item"><span class="m-dot"></span>Softr.io</span>
       <span class="m-item"><span class="m-dot"></span>Airtable</span>
-           <span class="m-item"><span class="m-dot"></span>RGPD</span>
+      <span class="m-item"><span class="m-dot"></span>Product Strategy</span>
+      <span class="m-item"><span class="m-dot"></span>RGPD</span>
       <span class="m-item"><span class="m-dot"></span>Accessibilité</span>
       <span class="m-item"><span class="m-dot"></span>Design System</span>
-      <span class="m-item"><span class="m-dot"></span>Github</span>    
+      <span class="m-item"><span class="m-dot"></span>Sports Tech</span>
+      <!-- duplicate for seamless loop -->
+      <span class="m-item"><span class="m-dot"></span>Design UX</span>
+      <span class="m-item"><span class="m-dot"></span>Formations</span>
+      <span class="m-item"><span class="m-dot"></span>Community Tech</span>
+      <span class="m-item"><span class="m-dot"></span>React Native</span>
+      <span class="m-item"><span class="m-dot"></span>Figma</span>
+      <span class="m-item"><span class="m-dot"></span>Softr.io</span>
+      <span class="m-item"><span class="m-dot"></span>Airtable</span>
+      <span class="m-item"><span class="m-dot"></span>Product Strategy</span>
+      <span class="m-item"><span class="m-dot"></span>RGPD</span>
+      <span class="m-item"><span class="m-dot"></span>Accessibilité</span>
+      <span class="m-item"><span class="m-dot"></span>Design System</span>
+      <span class="m-item"><span class="m-dot"></span>Sports Tech</span>
     </div>
   </div>
 
@@ -992,7 +1008,7 @@
       <div class="s-meta reveal">
         <span class="s-num">01</span>
         <div class="s-rule"></div>
-        <span class="s-tag">About</span>
+        <span class="s-tag">A propos</span>
       </div>
 
       <div class="about-grid">
@@ -1019,7 +1035,7 @@
 
         <div class="about-body reveal from-right">
           <p>
-            Designeuse UX/UI &amp; Développeuse Front-End, j'ai travaillé sur des projets variés : développement d'applications (Hitting en React Native), design de sites Figma, et conception d'apps iOS.
+            Design UX/UIer &amp; Développeuse Front-End, j'ai travaillé sur des projets variés : développement d'applications (Hitting en React Native), design de sites Figma, et conception d'apps iOS.
           </p>
           <p>
             Ma spécialité : créer des formations accessibles et engageantes en Design UX/UI, Développement Web, et Accessibilité. Je crois que la pédagogie rigoureuse peut transformer des carrières.
@@ -1038,29 +1054,22 @@
         <div class="s-meta reveal" style="margin-bottom:0;">
           <span class="s-num">02</span>
           <div class="s-rule"></div>
-          <span class="s-tag">Featured Work</span>
+          <span class="s-tag">Projets UX/UI Design</span>
         </div>
-        <h2 class="reveal" style="font-size:clamp(1.8rem,4vw,3rem);">Case Studies</h2>
+        <h2 class="reveal" style="font-size:clamp(1.8rem,4vw,3rem);">Projets</h2>
       </div>
 
       <div class="work-grid reveal scale-in">
 
         <!-- ── HITTING — featured wide ──────────────────────────────── -->
-        <a href="https://www.figma.com/design/your-hitting-figma-link" target="_blank" rel="noopener" class="work-card wc-featured">
-          <div class="wc-visual hitting-bg">
-            <div class="wc-visual-inner">
-              
-              <img src="HittingCover.webp" alt="Hitting App Mockup" >
-            </div>
-          </div>
-
+        
           <div class="wc-body">
             <div class="wc-section" style="position:relative;">
               <div class="wc-arrow">↗</div>
               <div class="wc-cats">Développement Mobile &nbsp;·&nbsp; Design UX/UI &nbsp;·&nbsp; React Native</div>
               <div class="wc-title">Hitting</div>
               <div class="wc-sub">Plateforme de matching pour clubs de boxe</div>
-              <div class="wc-role">Designeuse UX/UI & Développeuse</div>
+              <div class="wc-role">Design UX/UIer & Developer</div>
               <p class="wc-desc">Application mobile (iOS & Android) permettant aux clubs de boxe de trouver des boxeurs compatibles (âge, sexe, catégorie de poids) pour des galas et sparrings. V1 développée sur Softr.io + Airtable. V2 PWA en React Native, Firebase et Airtable en cours.</p>
               <p style="font-size:.84rem;color:var(--gray);margin-bottom:1rem;line-height:1.65;"><strong style="color:var(--white);">Contributions :</strong> Développement V1 (Softr, Airtable), design et développement V2 (React Native, Firebase), optimisations UX et accessibilité.</p>
             </div>
@@ -1082,45 +1091,32 @@
         </a>
 
         <!-- ── AMOKI ÉDITIONS ─────────────────────────────────────────── -->
-        <a href="https://www.figma.com/design/8WkIwOBXgCKiMiDE06mGAY/Amoki?node-id=347-1306" target="_blank" rel="noopener" class="work-card" style="position:relative;">
-          <div class="wc-visual amoki-bg">
-            <div class="wc-visual-inner">
               
-              <img src="MockupAmoki.png" alt="Amoki App Mockup" >
-            </div>
-          </div>
           <div class="wc-body" style="position:relative;">
             <div class="wc-arrow">↗</div>
             <div class="wc-cats">App Mobile &nbsp;·&nbsp; Design UX/UI &nbsp;·&nbsp; Prototype</div>
             <div class="wc-title">Amoki</div>
             <div class="wc-sub">App iOS pour lire des livres audios</div>
-            <div class="wc-role">Designeuse UX/UI</div>
+            <div class="wc-role">Design UX/UIer</div>
             <p class="wc-desc">Application iOS permettant de lire et d'écouter des livres audios. Conception Figma complète avec interface intuitive pour enfants et parents, navigation simple, lecteur audio optimisé.</p>
             <div class="wc-chips">
               <span class="chip">Design Figma</span>
               <span class="chip">App iOS</span>
               <span class="chip">Interface Intuitive</span>
             </div>
-            <a href="https://www.figma.com/design/8WkIwOBXgCKiMiDE06mGAY/Amoki" target="_blank" rel="noopener" class="wc-link">
-              Voir le design →
-            </a>
+          
           </div>
         </a>
 
         <!-- ── GIGRH ──────────────────────────────────────────────────── -->
-        <a href="https://www.figma.com/design/cIOMEtv4sQZdzsE5dJZWNA/Design-system-Gigi-rh?node-id=7-11" target="_blank" rel="noopener" class="work-card" style="position:relative;">
-          <div class="wc-visual gigrh-bg">
-            <div class="wc-visual-inner">
-              
-              <img src="GigiRhCover.png" alt="GigiRH Design Web Mockup" >
-            </div>
-          </div>
+       
+         
           <div class="wc-body" style="position:relative;">
             <div class="wc-arrow">↗</div>
             <div class="wc-cats">Design Web &nbsp;·&nbsp; Design UX/UI &nbsp;·&nbsp; Figma</div>
             <div class="wc-title">GigiRH</div>
             <div class="wc-sub">Site web pour autoentrepreneuse RH</div>
-            <div class="wc-role">Designeuse UX/UI</div>
+            <div class="wc-role">Design UX/UIer</div>
             <p class="wc-desc">Design web complet sur Figma pour une autoentrepreneuse RH. Conception d'une identité visuelle cohérente, architecture d'information claire, pages produits et services, optimisation UX pour conversion.</p>
             <div class="wc-chips">
               <span class="chip">Design Figma</span>
@@ -1151,7 +1147,7 @@
 
       <div class="srv-grid stagger">
         <div class="srv-card c-rose">
-          <div class="srv-ico rose">🎓</div>
+          <img src="https://img.icons8.com/?size=100&id=CLdItlP7mqXw&format=png&color=000000" alt="" srcset="">
           <div class="srv-title">Formations UX &amp; Web</div>
           <p class="srv-desc">Conception et animation de formations UX/UI &amp; Web pour tous profils. Organisme de formation enregistré (n° 11931240793). 20+ formations livrées, 200+ apprenants formés, 100% de satisfaction.</p>
           <div class="srv-tags">
@@ -1164,7 +1160,7 @@
         </div>
 
         <div class="srv-card c-blue">
-          <div class="srv-ico blue">⚡</div>
+          <img src="https://img.icons8.com/?size=100&id=ojkEjofaSq39&format=png&color=000000" alt="" srcset="">
           <div class="srv-title">Development &amp; Design Web</div>
           <p class="srv-desc">Développement mobile (React Native, iOS), design web sur Figma, optimisation UX. Applications, sites web, avec focus sur accessibilité et expérience utilisateur.</p>
           <div class="srv-tags">
@@ -1179,7 +1175,7 @@
         </div>
 
         <div class="srv-card c-white">
-          <div class="srv-ico white">🧩</div>
+          <img src="https://img.icons8.com/?size=100&id=LIYlwUkG7Fpq&format=png&color=000000" alt="" srcset="">
           <div class="srv-title">Design Systems &amp; Accessibilité</div>
           <p class="srv-desc">Construction de Design Systems robustes (Auto Layout, Variants, Tokens Studio) et audits accessibilité WCAG pour interfaces inclusives et scalables.</p>
           <div class="srv-tags">
@@ -1246,7 +1242,7 @@
   <!-- FOOTER -->
   <footer>
     <span>© 2025 Wassila Amoura</span>
-    <span>Formatrice<span class="footer-dot">✦</span>Développeuse<span class="footer-dot">✦</span>Design UX/UI</span>
+    <span>Formatrice<span class="footer-dot">✦</span>Developer<span class="footer-dot">✦</span>Design UX/UI</span>
     <span>Made with care</span>
   </footer>
 
