@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wassila Amoura — Formatrice & UX/Product Consultant</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0a0a0a;
+      --bg2:     #111111;
+      --card:    #131313;
+      --line:    #1e1e1e;
+      --line2:   #2a2a2a;
+      --white:   #ffffff;
+      --gray:    #777777;
+      --gray-lt: #444444;
+      --rose:    #FFD7E8;
+      --blue:    #A8D8D8;
+      --ease:    cubic-bezier(.22, 1, .36, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      line-height: 1.55;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ─── CUSTOM CURSOR ───────────────────────────────────────────────── */
+    #cur-dot {
+      position: fixed;
+      top: 0; left: 0;
+      width: 6px; height: 6px;
+      background: var(--rose);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width .2s, height .2s, background .2s;
+    }
+
+    #cur-ring {
+      position: fixed;
+      top: 0; left: 0;
+      width: 28px; height: 28px;
+      border: 1px solid rgba(255,215,232,.35);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width .35s var(--ease), height .35s var(--ease),
+                  border-color .35s ease, background .35s ease;
+    }
+
+    body.cursor-hover #cur-dot  { width: 10px; height: 10px; background: var(--rose); }
+    body.cursor-hover #cur-ring { width: 50px; height: 50px; border-color: rgba(255,215,232,.55); background: rgba(255,215,232,.04); }
+
+    /* ─── SCROLL PROGRESS ─────────────────────────────────────────────── */
+    #prog {
+      position: fixed;
+      top: 0; left: 0;
+      height: 1px;
+      width: 0%;
+      background: var(--rose);
+      z-index: 200;
+      transition: width .12s linear;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.75rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: padding .4s var(--ease), background .4s ease, border-bottom .4s ease;
+    }
+
+    nav.scrolled {
+      padding: 1rem 3rem;
+      background: rgba(10,10,10,.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-logo {
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: .78rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+      transition: color .3s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0;
+      width: 0; height: 1px;
+      background: var(--rose);
+      transition: width .35s var(--ease);
+    }
+
+    .nav-links a:hover        { color: var(--white); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active       { color: var(--white); }
+    .nav-links a.active::after { width: 100%; }
+
+    /* ─── BUTTONS ─────────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .9rem 2rem;
+      border-radius: 100px;
+      font-size: .88rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: none;
+      border: none;
+      letter-spacing: .02em;
+      transition: transform .35s var(--ease), box-shadow .35s ease;
+    }
+
+    .btn:hover { transform: translateY(-3px) scale(1.02); }
+    .btn:active { transform: scale(.97); }
+
+    .btn-primary {
+      background: var(--rose);
+      color: #200010;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 0 8px rgba(255,215,232,.14), 0 10px 36px rgba(255,215,232,.28);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--line2);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--gray-lt);
+      box-shadow: 0 4px 24px rgba(255,255,255,.04);
+    }
+
+    /* ─── HERO ────────────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 3rem 5rem;
+      position: relative;
+      border-bottom: 1px solid var(--line);
+    }
+
+    /* subtle grid bg */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 80px 80px;
+      opacity: .35;
+      pointer-events: none;
+    }
+
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 20% 80%, rgba(255,215,232,.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp .5s var(--ease) .05s forwards;
+    }
+
+    /* Split text: each line slides up from behind a clip */
+    .hero-title {
+      margin-bottom: 3rem;
+    }
+
+    h1 {
+      font-size: clamp(3.5rem, 9.5vw, 8.5rem);
+      font-weight: 800;
+      line-height: .98;
+      letter-spacing: -.04em;
+    }
+
+    .line-clip {
+      display: block;
+      overflow: hidden;
+    }
+
+    .line-clip span {
+      display: block;
+      transform: translateY(108%);
+      animation: slideUp .9s var(--ease) forwards;
+    }
+
+    .line-clip:nth-child(1) span { animation-delay: .1s; }
+    .line-clip:nth-child(2) span { animation-delay: .22s; }
+    .line-clip:nth-child(3) span { animation-delay: .34s; }
+
+    @keyframes slideUp {
+      to { transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .accent { color: var(--rose); }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--gray);
+      letter-spacing: .02em;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp .6s var(--ease) .75s forwards;
+    }
+
+    .hero-sub strong { color: var(--white); font-weight: 600; }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp .6s var(--ease) .9s forwards;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 3rem;
+      right: 3rem;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .6rem;
+      font-size: .65rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gray);
+      opacity: 0;
+      animation: fadeUp .5s var(--ease) 1.3s forwards;
+    }
+
+    .scroll-cue-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, transparent, var(--gray));
+      animation: lineDrop 2s ease-in-out infinite;
+    }
+
+    @keyframes lineDrop {
+      0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+      50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
+    }
+
+    /* ─── MARQUEE ─────────────────────────────────────────────────────── */
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 1rem 0;
+      background: var(--bg2);
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      white-space: nowrap;
+      animation: marq 28s linear infinite;
+    }
+
+    .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+
+    @keyframes marq {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .m-item {
+      display: inline-flex;
+      align-items: center;
+      gap: .75rem;
+      padding: 0 2rem;
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .m-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--rose); flex-shrink: 0; }
+
+    /* ─── SHARED SECTION STYLES ───────────────────────────────────────── */
+    section { padding: 8rem 3rem; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .s-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .s-num {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--rose);
+    }
+
+    .s-rule {
+      flex: 0 0 36px;
+      height: 1px;
+      background: var(--line2);
+    }
+
+    .s-tag {
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    h2 {
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      font-weight: 800;
+      letter-spacing: -.035em;
+      line-height: 1.0;
+    }
+
+    /* ─── ABOUT ───────────────────────────────────────────────────────── */
+    #about {
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 7rem;
+      align-items: start;
+    }
+
+    .about-statement {
+      font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.45;
+      margin-bottom: 2.5rem;
+      letter-spacing: -.02em;
+    }
+
+    .about-statement em {
+      font-style: normal;
+      color: var(--rose);
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .stat-cell {
+      padding: 1.5rem 1.25rem;
+      border-right: 1px solid var(--line);
+    }
+
+    .stat-cell:last-child { border-right: none; }
+
+    .stat-n {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -.04em;
+      line-height: 1;
+      margin-bottom: .4rem;
+    }
+
+    .stat-n em {
+      font-style: normal;
+      color: var(--rose);
+    }
+
+    .stat-l {
+      font-size: .72rem;
+      color: var(--gray);
+      letter-spacing: .03em;
+    }
+
+    .about-body p {
+      color: var(--gray);
+      font-size: .95rem;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    .about-body p strong { color: var(--white); font-weight: 600; }
+
+    /* ─── WORK ────────────────────────────────────────────────────────── */
+    #work {
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .work-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    /* featured card spans full width */
+    .wc-featured { grid-column: 1 / -1; }
+
+    .work-card {
+      background: var(--card);
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      transition: background .3s ease;
+      cursor: none;
+    }
+
+    .work-card:hover { background: #161616; }
+
+    /* visual banner */
+    .wc-visual {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wc-featured .wc-visual { height: 260px; }
+    .wc-featured .wc-body   {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--line);
+    }
+
+    .work-card:not(.wc-featured) .wc-visual { height: 220px; }
+
+    .wc-visual-inner {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .6s var(--ease);
+    }
+
+    .work-card:hover .wc-visual-inner { transform: scale(1.04); }
+
+    .hitting-bg  { background: #0d0008; }
+    .amoki-bg    { background: #120d06; }
+    .gigrh-bg    { background: #06090f; }
+
+    /* card text extras */
+    .wc-cats {
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: .55rem;
+    }
+
+    .wc-sub {
+      font-size: .82rem;
+      color: var(--gray);
+      margin-top: .2rem;
+      margin-bottom: .65rem;
+    }
+
+    .wc-role {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .05em;
+      color: var(--rose);
+      margin-bottom: 1rem;
+    }
+
+    .wc-role::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--rose);
+      opacity: .6;
+    }
+
+    /* floating orbs in visuals */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    /* wc-body text area */
+    .wc-body { padding: 1.75rem 2rem; border-top: 1px solid var(--line); }
+
+    .wc-featured .wc-section {
+      padding: 2rem 2.5rem;
+      border-right: 1px solid var(--line);
+    }
+
+    .wc-featured .wc-section:last-child { border-right: none; }
+
+    .wc-tag {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: .75rem;
+    }
+
+    .wc-title {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: .6rem;
+      line-height: 1.3;
+      transition: color .25s ease;
+    }
+
+    .work-card:hover .wc-title { color: var(--rose); }
+
+    .wc-desc {
+      font-size: .84rem;
+      color: var(--gray);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+
+    .wc-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+
+    .chip {
+      font-size: .68rem;
+      padding: .22rem .65rem;
+      border-radius: 100px;
+      background: var(--bg);
+      border: 1px solid var(--line2);
+      color: var(--gray);
+      letter-spacing: .03em;
+    }
+
+    .wc-arrow {
+      position: absolute;
+      top: 1.75rem;
+      right: 2rem;
+      font-size: 1.1rem;
+      color: var(--gray);
+      transition: transform .35s var(--ease), color .3s ease;
+    }
+
+    .work-card:hover .wc-arrow {
+      transform: translate(4px, -4px);
+      color: var(--rose);
+    }
+
+    /* ─── SERVICES ────────────────────────────────────────────────────── */
+    #services {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .srv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 3rem;
+    }
+
+    .srv-card {
+      background: var(--bg);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: background .3s ease;
+    }
+
+    .srv-card:hover { background: #121212; }
+
+    .srv-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: transparent;
+      transition: background .3s ease;
+    }
+
+    .srv-card.c-rose:hover::after  { background: var(--rose); }
+    .srv-card.c-blue:hover::after  { background: var(--blue); }
+    .srv-card.c-white:hover::after { background: var(--gray-lt); }
+
+    .srv-ico {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      transition: transform .4s var(--ease);
+    }
+
+    .srv-card:hover .srv-ico { transform: rotate(8deg) scale(1.1); }
+
+    .srv-ico.rose  { background: rgba(255,215,232,.1); }
+    .srv-ico.blue  { background: rgba(168,216,216,.1); }
+    .srv-ico.white { background: rgba(255,255,255,.06); }
+
+    .srv-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: .75rem;
+      line-height: 1.3;
+    }
+
+    .srv-desc {
+      font-size: .84rem;
+      color: var(--gray);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .srv-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+
+    .srv-tag {
+      font-size: .68rem;
+      padding: .22rem .6rem;
+      border-radius: 100px;
+      border: 1px solid var(--line2);
+      color: var(--gray-lt);
+      letter-spacing: .03em;
+      transition: border-color .25s ease, color .25s ease;
+    }
+
+    .srv-card:hover .srv-tag { border-color: var(--gray); color: var(--gray); }
+
+    /* ─── CONTACT ─────────────────────────────────────────────────────── */
+    #contact { background: var(--bg); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .contact-h {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -.04em;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-h em { font-style: normal; color: var(--rose); }
+
+    .contact-sub {
+      color: var(--gray);
+      font-size: .95rem;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .cp-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 1.75rem;
+      border-bottom: 1px solid var(--line);
+      text-decoration: none;
+      transition: background .25s ease;
+      cursor: none;
+    }
+
+    .cp-row:last-child { border-bottom: none; }
+    .cp-row:hover      { background: #1a1a1a; }
+
+    .cp-label {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: .3rem;
+    }
+
+    .cp-value {
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--white);
+      transition: color .25s ease;
+    }
+
+    .cp-row:hover .cp-value { color: var(--rose); }
+
+    .cp-available { color: #4ade80; }
+
+    .cp-arrow {
+      font-size: 1.1rem;
+      color: var(--gray);
+      transition: transform .3s var(--ease), color .3s ease;
+    }
+
+    .cp-row:hover .cp-arrow {
+      transform: translate(4px, -4px);
+      color: var(--rose);
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────────────────── */
+    footer {
+      padding: 2rem 3rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: .72rem;
+      letter-spacing: .05em;
+      color: var(--gray);
+    }
+
+    .footer-dot { color: var(--rose); margin: 0 .4rem; }
+
+    /* ─── SCROLL ANIMATIONS ───────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .7s var(--ease), transform .7s var(--ease);
+    }
+
+    .reveal.from-left  { transform: translateX(-32px); }
+    .reveal.from-right { transform: translateX(32px); }
+    .reveal.scale-in   { transform: scale(.96); }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* stagger for grid children */
+    .stagger > * {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s var(--ease), transform .6s var(--ease);
+    }
+
+    .stagger.in > *:nth-child(1) { opacity:1; transform:none; transition-delay:.00s; }
+    .stagger.in > *:nth-child(2) { opacity:1; transform:none; transition-delay:.10s; }
+    .stagger.in > *:nth-child(3) { opacity:1; transform:none; transition-delay:.20s; }
+    .stagger.in > *:nth-child(4) { opacity:1; transform:none; transition-delay:.30s; }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      section { padding: 5rem 1.5rem; }
+      nav { padding: 1.25rem 1.5rem; }
+      nav.scrolled { padding: .9rem 1.5rem; }
+      .nav-links { display: none; }
+      #hero { padding: 0 1.5rem 4rem; }
+
+      .about-grid  { grid-template-columns: 1fr; gap: 3rem; }
+      .about-stats { grid-template-columns: repeat(3, 1fr); }
+
+      .work-grid { grid-template-columns: 1fr; }
+      .wc-featured .wc-body { grid-template-columns: 1fr; }
+      .wc-featured .wc-section { border-right: none; border-bottom: 1px solid var(--line); }
+      .wc-featured .wc-visual { height: 200px; }
+
+      .srv-grid { grid-template-columns: 1fr; }
+
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+      footer { flex-direction: column; gap: .5rem; text-align: center; }
+
+      #cur-dot, #cur-ring { display: none; }
+      body { cursor: auto; }
+      .btn { cursor: pointer; }
+    }
+
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .srv-grid  { grid-template-columns: repeat(2, 1fr); }
+      .work-grid { grid-template-columns: 1fr; }
+      .wc-featured .wc-visual { height: 220px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+      .line-clip span { transform: none; animation: none; }
+      .reveal, .stagger > * { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div id="cur-dot"></div>
+  <div id="cur-ring"></div>
+
+  <!-- PROGRESS -->
+  <div id="prog"></div>
+
+  <!-- ═══ NAV ════════════════════════════════════════════════════════════ -->
+  <nav id="nav">
+    <a class="nav-logo" href="#hero">WA — Wassila Amoura</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══ HERO ════════════════════════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-content container" style="max-width:1100px;">
+
+      <p class="hero-eyebrow">UX/Product · Community Tech · Formation</p>
+
+      <div class="hero-title">
+        <h1>
+          <span class="line-clip"><span>Formatrice</span></span>
+          <span class="line-clip"><span>&amp; <span class="accent">Consultant</span></span></span>
+          <span class="line-clip"><span>UX/Product.</span></span>
+        </h1>
+      </div>
+
+      <p class="hero-sub">
+        <strong>20+ formations</strong> livrées &ensp;·&ensp;
+        <strong>200+ apprenants</strong> formés &ensp;·&ensp;
+        <strong>100%</strong> de satisfaction
+      </p>
+
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Let's Talk →</a>
+        <a href="#work"    class="btn btn-ghost">See my work</a>
+      </div>
+    </div>
+
+    <div class="scroll-cue">
+      <span>Scroll</span>
+      <div class="scroll-cue-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══ MARQUEE ══════════════════════════════════════════════════════════ -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="m-item"><span class="m-dot"></span>UX Design</span>
+      <span class="m-item"><span class="m-dot"></span>Formations</span>
+      <span class="m-item"><span class="m-dot"></span>Community Tech</span>
+      <span class="m-item"><span class="m-dot"></span>React Native</span>
+      <span class="m-item"><span class="m-dot"></span>Figma</span>
+      <span class="m-item"><span class="m-dot"></span>Product Strategy</span>
+      <span class="m-item"><span class="m-dot"></span>RGPD</span>
+      <span class="m-item"><span class="m-dot"></span>Accessibilité</span>
+      <span class="m-item"><span class="m-dot"></span>Design System</span>
+      <span class="m-item"><span class="m-dot"></span>Sports Tech</span>
+      <!-- duplicate for seamless loop -->
+      <span class="m-item"><span class="m-dot"></span>UX Design</span>
+      <span class="m-item"><span class="m-dot"></span>Formations</span>
+      <span class="m-item"><span class="m-dot"></span>Community Tech</span>
+      <span class="m-item"><span class="m-dot"></span>React Native</span>
+      <span class="m-item"><span class="m-dot"></span>Figma</span>
+      <span class="m-item"><span class="m-dot"></span>Product Strategy</span>
+      <span class="m-item"><span class="m-dot"></span>RGPD</span>
+      <span class="m-item"><span class="m-dot"></span>Accessibilité</span>
+      <span class="m-item"><span class="m-dot"></span>Design System</span>
+      <span class="m-item"><span class="m-dot"></span>Sports Tech</span>
+    </div>
+  </div>
+
+  <!-- ═══ ABOUT ════════════════════════════════════════════════════════════ -->
+  <section id="about">
+    <div class="container">
+      <div class="s-meta reveal">
+        <span class="s-num">01</span>
+        <div class="s-rule"></div>
+        <span class="s-tag">About</span>
+      </div>
+
+      <div class="about-grid">
+        <div class="reveal from-left">
+          <p class="about-statement">
+            Je crée des formations <em>UX/UI&nbsp;&amp;&nbsp;Web</em> et conseille des startups en <em>community&nbsp;tech</em>.
+          </p>
+
+          <div class="about-stats stagger">
+            <div class="stat-cell">
+              <div class="stat-n">20<em>+</em></div>
+              <div class="stat-l">Formations livrées</div>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-n">200<em>+</em></div>
+              <div class="stat-l">Apprenants formés</div>
+            </div>
+            <div class="stat-cell" style="border-right:none;">
+              <div class="stat-n">100<em>%</em></div>
+              <div class="stat-l">Satisfaction</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-body reveal from-right">
+          <p>
+            Fondatrice &amp; Product Designer, j'ai co-conçu <strong>Hitting</strong> de A à Z — de la stratégie produit au Design System 40+ composants, jusqu'au déploiement React Native en production.
+          </p>
+          <p>
+            En parallèle, je forme des équipes à l'UX, à l'accessibilité RGAA et au responsive design. Mon approche : pédagogie accessible, design rigoureux, vision produit.
+          </p>
+          <p>Organisme de formation enregistré. Disponible pour consulting.</p>
+          <a href="#work" class="btn btn-ghost" style="margin-top:1.75rem;">Voir mes projets →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ WORK ══════════════════════════════════════════════════════════════ -->
+  <section id="work">
+    <div class="container">
+      <div class="work-header">
+        <div class="s-meta reveal" style="margin-bottom:0;">
+          <span class="s-num">02</span>
+          <div class="s-rule"></div>
+          <span class="s-tag">Featured Work</span>
+        </div>
+        <h2 class="reveal" style="font-size:clamp(1.8rem,4vw,3rem);">Case Studies</h2>
+      </div>
+
+      <div class="work-grid reveal scale-in">
+
+        <!-- ── HITTING — featured wide ──────────────────────────────── -->
+        <div class="work-card wc-featured">
+          <div class="wc-visual hitting-bg">
+            <div class="wc-visual-inner">
+              <div class="orb" style="width:220px;height:220px;background:rgba(255,215,232,.07);top:-60px;left:8%;"></div>
+              <div class="orb" style="width:160px;height:160px;background:rgba(168,216,216,.06);bottom:-40px;right:12%;"></div>
+              <svg viewBox="0 0 680 270" width="680" height="270" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- phone left -->
+                <rect x="185" y="38" width="72" height="134" rx="13" fill="rgba(255,215,232,.05)" stroke="rgba(255,215,232,.22)" stroke-width="1.5"/>
+                <rect x="199" y="56" width="44" height="70" rx="5" fill="rgba(255,215,232,.04)" stroke="rgba(255,215,232,.1)" stroke-width="1"/>
+                <rect x="199" y="134" width="24" height="5" rx="2.5" fill="rgba(255,215,232,.18)"/>
+                <rect x="227" y="134" width="16" height="5" rx="2.5" fill="rgba(255,215,232,.09)"/>
+                <rect x="207" y="44" width="26" height="4" rx="2" fill="rgba(255,215,232,.14)"/>
+                <!-- phone centre (hero) -->
+                <rect x="274" y="18" width="82" height="158" rx="14" fill="rgba(255,215,232,.09)" stroke="rgba(255,215,232,.38)" stroke-width="1.5"/>
+                <rect x="289" y="37" width="52" height="88" rx="6" fill="rgba(255,215,232,.05)" stroke="rgba(255,215,232,.14)" stroke-width="1"/>
+                <!-- status bar dots inside -->
+                <circle cx="295" cy="44" r="3" fill="rgba(255,215,232,.2)"/>
+                <rect x="289" y="133" width="26" height="5" rx="2.5" fill="rgba(255,215,232,.24)"/>
+                <rect x="319" y="133" width="22" height="5" rx="2.5" fill="rgba(255,215,232,.11)"/>
+                <rect x="305" y="25" width="28" height="4" rx="2" fill="rgba(255,215,232,.2)"/>
+                <!-- mini UI rows inside phone -->
+                <rect x="292" y="52" width="42" height="16" rx="3" fill="rgba(255,215,232,.06)"/>
+                <rect x="292" y="72" width="30" height="5" rx="2.5" fill="rgba(255,215,232,.1)"/>
+                <rect x="292" y="82" width="42" height="5" rx="2.5" fill="rgba(255,215,232,.06)"/>
+                <rect x="292" y="96" width="42" height="16" rx="3" fill="rgba(255,215,232,.04)" stroke="rgba(255,215,232,.08)" stroke-width="1"/>
+                <rect x="292" y="116" width="28" height="5" rx="2.5" fill="rgba(255,215,232,.07)"/>
+                <!-- phone right -->
+                <rect x="374" y="38" width="72" height="134" rx="13" fill="rgba(168,216,216,.05)" stroke="rgba(168,216,216,.22)" stroke-width="1.5"/>
+                <rect x="388" y="56" width="44" height="70" rx="5" fill="rgba(168,216,216,.04)" stroke="rgba(168,216,216,.1)" stroke-width="1"/>
+                <rect x="388" y="134" width="24" height="5" rx="2.5" fill="rgba(168,216,216,.18)"/>
+                <rect x="416" y="134" width="16" height="5" rx="2.5" fill="rgba(168,216,216,.09)"/>
+                <rect x="396" y="44" width="26" height="4" rx="2" fill="rgba(168,216,216,.14)"/>
+                <!-- decorative rings -->
+                <circle cx="130" cy="90"  r="32" stroke="rgba(255,215,232,.07)" stroke-width="1" fill="none"/>
+                <circle cx="130" cy="90"  r="18" stroke="rgba(255,215,232,.04)" stroke-width="1" fill="none"/>
+                <circle cx="510" cy="165" r="42" stroke="rgba(168,216,216,.07)" stroke-width="1" fill="none"/>
+                <!-- labels -->
+                <text x="142" y="220" font-family="monospace" font-size="9.5" fill="rgba(255,215,232,.22)">Design System · 40+ components</text>
+                <text x="360" y="244" font-family="monospace" font-size="9.5" fill="rgba(168,216,216,.22)">React Native · Firebase Auth · RGPD</text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="wc-body">
+            <div class="wc-section" style="position:relative;">
+              <div class="wc-arrow">↗</div>
+              <div class="wc-cats">Product Design &nbsp;·&nbsp; Design System &nbsp;·&nbsp; Full-Stack</div>
+              <div class="wc-title">Hitting</div>
+              <div class="wc-sub">Mobile App for Boxing Clubs</div>
+              <div class="wc-role">Founder &amp; Product Designer</div>
+              <p class="wc-desc">Native iOS &amp; Android app helping boxing clubs organize interclub fights — from strategy to production.</p>
+            </div>
+            <div class="wc-section">
+              <div class="wc-tag" style="margin-bottom:.85rem;">Key Results</div>
+              <div class="wc-chips">
+                <span class="chip">40+ component DS</span>
+                <span class="chip">React Native v2</span>
+                <span class="chip">RGPD compliant</span>
+                <span class="chip">Firebase Auth</span>
+                <span class="chip">5 UX cycles</span>
+                <span class="chip">Live in production</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── AMOKI ÉDITIONS ─────────────────────────────────────────── -->
+        <div class="work-card" style="position:relative;">
+          <div class="wc-visual amoki-bg">
+            <div class="wc-visual-inner">
+              <div class="orb" style="width:150px;height:150px;background:rgba(255,200,120,.06);top:-30px;right:-10px;"></div>
+              <svg viewBox="0 0 380 220" width="360" height="210" fill="none">
+                <!-- design system grid header -->
+                <rect x="30" y="25" width="320" height="16" rx="3" fill="rgba(255,200,120,.06)" stroke="rgba(255,200,120,.15)" stroke-width="1"/>
+                <rect x="38" y="30" width="40" height="6" rx="3" fill="rgba(255,200,120,.2)"/>
+                <rect x="86" y="30" width="60" height="6" rx="3" fill="rgba(255,200,120,.1)"/>
+                <rect x="154" y="30" width="50" height="6" rx="3" fill="rgba(255,200,120,.08)"/>
+                <!-- component cards row 1 -->
+                <rect x="30"  y="50" width="92" height="60" rx="5" fill="rgba(255,200,120,.05)" stroke="rgba(255,200,120,.14)" stroke-width="1"/>
+                <rect x="130" y="50" width="92" height="60" rx="5" fill="rgba(255,200,120,.05)" stroke="rgba(255,200,120,.14)" stroke-width="1"/>
+                <rect x="230" y="50" width="120" height="60" rx="5" fill="rgba(255,200,120,.08)" stroke="rgba(255,200,120,.2)" stroke-width="1"/>
+                <!-- component card interiors -->
+                <rect x="38"  y="60" width="76" height="22" rx="3" fill="rgba(255,200,120,.08)"/>
+                <rect x="38"  y="88" width="50" height="5"  rx="2.5" fill="rgba(255,200,120,.12)"/>
+                <rect x="138" y="60" width="76" height="22" rx="3" fill="rgba(255,200,120,.06)"/>
+                <rect x="138" y="88" width="60" height="5"  rx="2.5" fill="rgba(255,200,120,.1)"/>
+                <!-- highlighted component (right) -->
+                <rect x="238" y="58" width="104" height="26" rx="4" fill="rgba(255,200,120,.12)"/>
+                <rect x="238" y="90" width="70"  height="5"  rx="2.5" fill="rgba(255,200,120,.2)"/>
+                <rect x="238" y="100" width="50" height="5"  rx="2.5" fill="rgba(255,200,120,.12)"/>
+                <!-- wireframe row below -->
+                <rect x="30"  y="122" width="150" height="72" rx="5" fill="rgba(255,200,120,.03)" stroke="rgba(255,200,120,.1)" stroke-width="1"/>
+                <rect x="38"  y="130" width="80"  height="8"  rx="2" fill="rgba(255,200,120,.1)"/>
+                <rect x="38"  y="145" width="134" height="5"  rx="2.5" fill="rgba(255,200,120,.06)"/>
+                <rect x="38"  y="155" width="100" height="5"  rx="2.5" fill="rgba(255,200,120,.05)"/>
+                <rect x="38"  y="165" width="120" height="5"  rx="2.5" fill="rgba(255,200,120,.04)"/>
+                <rect x="38"  y="180" width="50"  height="8"  rx="3" fill="rgba(255,200,120,.12)" stroke="rgba(255,200,120,.2)" stroke-width="1"/>
+                <!-- prototype mockup right -->
+                <rect x="192" y="122" width="158" height="72" rx="5" fill="rgba(255,200,120,.04)" stroke="rgba(255,200,120,.12)" stroke-width="1"/>
+                <rect x="200" y="130" width="40"  height="40" rx="4" fill="rgba(255,200,120,.06)"/>
+                <rect x="248" y="132" width="90"  height="6"  rx="2.5" fill="rgba(255,200,120,.12)"/>
+                <rect x="248" y="144" width="70"  height="5"  rx="2.5" fill="rgba(255,200,120,.07)"/>
+                <rect x="248" y="154" width="80"  height="5"  rx="2.5" fill="rgba(255,200,120,.06)"/>
+                <rect x="200" y="176" width="60"  height="10" rx="3" fill="rgba(255,200,120,.08)"/>
+                <text x="35" y="212" font-family="monospace" font-size="8.5" fill="rgba(255,200,120,.3)">15 wireframes · 8 prototypes interactifs</text>
+              </svg>
+            </div>
+          </div>
+          <div class="wc-body" style="position:relative;">
+            <div class="wc-arrow">↗</div>
+            <div class="wc-cats">Design System &nbsp;·&nbsp; Wireframing &nbsp;·&nbsp; UX</div>
+            <div class="wc-title">Amoki Éditions</div>
+            <div class="wc-sub">Design System &amp; Wireframes</div>
+            <div class="wc-role">UX/UI Designer</div>
+            <p class="wc-desc">Design system and wireframes for a publishing platform — 15 wireframes, 8 interactive prototypes, subvention obtained.</p>
+            <div class="wc-chips">
+              <span class="chip">15 wireframes</span>
+              <span class="chip">8 prototypes</span>
+              <span class="chip">Subvention ✓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── GIGRH ──────────────────────────────────────────────────── -->
+        <div class="work-card" style="position:relative;">
+          <div class="wc-visual gigrh-bg">
+            <div class="wc-visual-inner">
+              <div class="orb" style="width:140px;height:140px;background:rgba(168,216,216,.08);bottom:-20px;right:-10px;"></div>
+              <svg viewBox="0 0 380 220" width="360" height="210" fill="none">
+                <!-- browser chrome -->
+                <rect x="25" y="22" width="330" height="176" rx="8" fill="rgba(168,216,216,.03)" stroke="rgba(168,216,216,.15)" stroke-width="1.5"/>
+                <rect x="25" y="22" width="330" height="28" rx="8" fill="rgba(168,216,216,.07)"/>
+                <circle cx="42" cy="36" r="5" fill="rgba(168,216,216,.3)"/>
+                <circle cx="57" cy="36" r="5" fill="rgba(168,216,216,.15)"/>
+                <circle cx="72" cy="36" r="5" fill="rgba(168,216,216,.08)"/>
+                <rect x="90" y="29" width="180" height="14" rx="4" fill="rgba(168,216,216,.06)"/>
+                <!-- sidebar -->
+                <rect x="25" y="50" width="64" height="148" rx="0" fill="rgba(168,216,216,.04)" stroke="none"/>
+                <rect x="33" y="62" width="48" height="8"  rx="2" fill="rgba(168,216,216,.15)"/>
+                <rect x="33" y="76" width="40" height="6"  rx="2" fill="rgba(168,216,216,.08)"/>
+                <rect x="33" y="88" width="44" height="6"  rx="2" fill="rgba(168,216,216,.06)"/>
+                <rect x="33" y="100" width="36" height="6" rx="2" fill="rgba(168,216,216,.06)"/>
+                <rect x="33" y="112" width="42" height="6" rx="2" fill="rgba(168,216,216,.05)"/>
+                <!-- main content area -->
+                <!-- table header -->
+                <rect x="97" y="58" width="250" height="20" rx="3" fill="rgba(168,216,216,.06)"/>
+                <rect x="104" y="64" width="50" height="6" rx="2" fill="rgba(168,216,216,.2)"/>
+                <rect x="180" y="64" width="40" height="6" rx="2" fill="rgba(168,216,216,.12)"/>
+                <rect x="250" y="64" width="50" height="6" rx="2" fill="rgba(168,216,216,.12)"/>
+                <!-- table rows -->
+                <rect x="97" y="84"  width="250" height="18" rx="2" fill="rgba(168,216,216,.03)" stroke="rgba(168,216,216,.06)" stroke-width=".5"/>
+                <circle cx="112" cy="93" r="6" fill="rgba(168,216,216,.12)"/>
+                <rect x="124" y="90" width="50" height="5" rx="2" fill="rgba(168,216,216,.12)"/>
+                <rect x="180" y="90" width="40" height="5" rx="2" fill="rgba(168,216,216,.08)"/>
+                <rect x="250" y="89" width="36" height="7" rx="3" fill="rgba(168,216,216,.12)"/>
+
+                <rect x="97" y="108" width="250" height="18" rx="2" fill="rgba(168,216,216,.04)" stroke="rgba(168,216,216,.06)" stroke-width=".5"/>
+                <circle cx="112" cy="117" r="6" fill="rgba(168,216,216,.1)"/>
+                <rect x="124" y="114" width="44" height="5" rx="2" fill="rgba(168,216,216,.1)"/>
+                <rect x="180" y="114" width="48" height="5" rx="2" fill="rgba(168,216,216,.07)"/>
+                <rect x="250" y="113" width="36" height="7" rx="3" fill="rgba(168,216,216,.08)"/>
+
+                <rect x="97" y="132" width="250" height="18" rx="2" fill="rgba(168,216,216,.03)" stroke="rgba(168,216,216,.06)" stroke-width=".5"/>
+                <circle cx="112" cy="141" r="6" fill="rgba(168,216,216,.08)"/>
+                <rect x="124" y="138" width="58" height="5" rx="2" fill="rgba(168,216,216,.08)"/>
+                <rect x="180" y="138" width="36" height="5" rx="2" fill="rgba(168,216,216,.06)"/>
+                <rect x="250" y="137" width="36" height="7" rx="3" fill="rgba(168,216,216,.12)"/>
+
+                <rect x="97" y="156" width="250" height="18" rx="2" fill="rgba(168,216,216,.02)" stroke="rgba(168,216,216,.05)" stroke-width=".5"/>
+                <circle cx="112" cy="165" r="6" fill="rgba(168,216,216,.07)"/>
+                <rect x="124" y="162" width="46" height="5" rx="2" fill="rgba(168,216,216,.07)"/>
+                <rect x="180" y="162" width="52" height="5" rx="2" fill="rgba(168,216,216,.05)"/>
+                <rect x="250" y="161" width="36" height="7" rx="3" fill="rgba(168,216,216,.1)"/>
+                <text x="30" y="210" font-family="monospace" font-size="8.5" fill="rgba(168,216,216,.3)">Figma Design · Built &amp; Deployed · Accessibility</text>
+              </svg>
+            </div>
+          </div>
+          <div class="wc-body" style="position:relative;">
+            <div class="wc-arrow">↗</div>
+            <div class="wc-cats">UX/UI Design &nbsp;·&nbsp; Front-End Development</div>
+            <div class="wc-title">GigiRH</div>
+            <div class="wc-sub">HR Platform Redesign</div>
+            <div class="wc-role">UX/UI Designer &amp; Developer</div>
+            <p class="wc-desc">Complete redesign and development of an HR management platform — from Figma mockups to live deployment.</p>
+            <div class="wc-chips">
+              <span class="chip">Figma → Wix</span>
+              <span class="chip">Deployed</span>
+              <span class="chip">Accessibility</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /work-grid -->
+    </div>
+  </section>
+
+  <!-- ═══ SERVICES ══════════════════════════════════════════════════════════ -->
+  <section id="services">
+    <div class="container">
+      <div class="s-meta reveal">
+        <span class="s-num">03</span>
+        <div class="s-rule"></div>
+        <span class="s-tag">Services</span>
+      </div>
+
+      <h2 class="reveal" style="margin-top:1rem;">Expertise</h2>
+
+      <div class="srv-grid stagger">
+        <div class="srv-card c-rose">
+          <div class="srv-ico rose">🎓</div>
+          <div class="srv-title">Formations UX &amp; Web</div>
+          <p class="srv-desc">Conception et animation de formations UX/UI &amp; Web pour tous profils. Organisme de formation enregistré. Pédagogie accessible, résultats concrets.</p>
+          <div class="srv-tags">
+            <span class="srv-tag">Design Thinking</span>
+            <span class="srv-tag">UX Research</span>
+            <span class="srv-tag">Accessibilité</span>
+            <span class="srv-tag">RGAA</span>
+          </div>
+        </div>
+
+        <div class="srv-card c-blue">
+          <div class="srv-ico blue">⚡</div>
+          <div class="srv-title">Product Design &amp; Consulting</div>
+          <p class="srv-desc">Accompagnement de la stratégie produit au déploiement. UX research, prototypage Figma, itérations utilisateurs, implémentation React Native.</p>
+          <div class="srv-tags">
+            <span class="srv-tag">Figma</span>
+            <span class="srv-tag">React Native</span>
+            <span class="srv-tag">Stratégie produit</span>
+            <span class="srv-tag">RGPD</span>
+          </div>
+        </div>
+
+        <div class="srv-card c-white">
+          <div class="srv-ico white">🧩</div>
+          <div class="srv-title">Design Systems &amp; Accessibility</div>
+          <p class="srv-desc">Construction de Design Systems robustes (Auto Layout, Variants, Tokens Studio) et audits accessibilité pour interfaces inclusives et scalables.</p>
+          <div class="srv-tags">
+            <span class="srv-tag">Design System</span>
+            <span class="srv-tag">Tokens Studio</span>
+            <span class="srv-tag">WCAG</span>
+            <span class="srv-tag">Audit UX</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══════════════════════════════════════════════════════════ -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-grid">
+
+        <div class="reveal from-left">
+          <div class="s-meta" style="margin-bottom:2rem;">
+            <span class="s-num">04</span>
+            <div class="s-rule"></div>
+            <span class="s-tag">Contact</span>
+          </div>
+          <h2 class="contact-h">
+            Let's Create<br>Something <em>Amazing</em>
+          </h2>
+          <p class="contact-sub">
+            Un projet de formation, une app à concevoir, un Design System à construire ?<br>Je réponds rapidement, sans jargon.
+          </p>
+          <a href="mailto:wassila@example.com" class="btn btn-primary">Envoyer un message →</a>
+        </div>
+
+        <div class="reveal from-right">
+          <div class="contact-panel">
+            <a href="mailto:wassila@example.com" class="cp-row">
+              <div>
+                <div class="cp-label">Email</div>
+                <div class="cp-value">wassila@example.com</div>
+              </div>
+              <span class="cp-arrow">↗</span>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" class="cp-row">
+              <div>
+                <div class="cp-label">LinkedIn</div>
+                <div class="cp-value">Wassila Amoura</div>
+              </div>
+              <span class="cp-arrow">↗</span>
+            </a>
+            <div class="cp-row" style="cursor:default;">
+              <div>
+                <div class="cp-label">Disponibilité</div>
+                <div class="cp-value cp-available">● Disponible pour missions</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2025 Wassila Amoura</span>
+    <span>Formatrice<span class="footer-dot">✦</span>UX/Product Consultant<span class="footer-dot">✦</span>Community Tech</span>
+    <span>Made with care</span>
+  </footer>
+
+  <script>
+    /* ── prefers-reduced-motion + mobile detection ──────────────────── */
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = () => window.innerWidth < 769;
+
+    /* ── Custom cursor (desktop only) ───────────────────────────────── */
+    const dot  = document.getElementById('cur-dot');
+    const ring = document.getElementById('cur-ring');
+    let mx = 0, my = 0;
+    let rx = 0, ry = 0;
+
+    if (!isMobile() && !reduced) {
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+      /* dot snaps instantly; ring follows with lag */
+      function tickCursor() {
+        dot.style.left = mx + 'px';
+        dot.style.top  = my + 'px';
+        rx += (mx - rx) * 0.13;
+        ry += (my - ry) * 0.13;
+        ring.style.left = rx + 'px';
+        ring.style.top  = ry + 'px';
+        requestAnimationFrame(tickCursor);
+      }
+      tickCursor();
+
+      /* hover state on interactive elements */
+      const hoverEls = document.querySelectorAll(
+        '.work-card, .srv-card, .btn, .cp-row, .nav-links a, .nav-logo'
+      );
+      hoverEls.forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+      });
+    }
+
+    /* ── Scroll progress ────────────────────────────────────────────── */
+    const prog = document.getElementById('prog');
+    function updateProg() {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      prog.style.width = total > 0 ? (window.scrollY / total * 100) + '%' : '0%';
+    }
+
+    /* ── Nav scroll behavior ────────────────────────────────────────── */
+    const nav     = document.getElementById('nav');
+    const navAs   = document.querySelectorAll('.nav-links a');
+    const secs    = document.querySelectorAll('section[id]');
+
+    function updateNav() {
+      const y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 30);
+
+      /* active link */
+      let cur = '';
+      secs.forEach(s => { if (y >= s.offsetTop - 120) cur = s.id; });
+      navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+    }
+
+    /* ── IntersectionObserver: reveal + stagger ─────────────────────── */
+    const revObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        revObs.unobserve(e.target);
+      });
+    }, { threshold: 0.12 });
+
+    const stgObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        stgObs.unobserve(e.target);
+      });
+    }, { threshold: 0.08 });
+
+    if (!reduced) {
+      document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+      document.querySelectorAll('.stagger').forEach(el => stgObs.observe(el));
+    } else {
+      document.querySelectorAll('.reveal, .stagger').forEach(el => el.classList.add('in'));
+    }
+
+    /* ── Throttled scroll handler ───────────────────────────────────── */
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateProg();
+          updateNav();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    /* initial run */
+    updateProg();
+    updateNav();
+  </script>
+</body>
+</html>
