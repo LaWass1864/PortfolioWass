@@ -635,7 +635,22 @@
       padding-top: 1px;
     }
 
-    .tl-content {}
+    .proj-link {
+  margin-top: auto;
+  color: var(--accent-color); /* ta couleur accent */
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.proj-link:hover {
+  gap: 1rem;
+  color: var(--accent-dark); /* couleur hover */
+}
 
     .tl-title {
       font-weight: 600;
@@ -1162,67 +1177,67 @@
 
       <div class="proj-grid stagger">
 
-        <!-- Hitting -->
-        <div class="proj-card">
-          <div class="proj-img">
-            <img src="HittingCover.webp" alt="Hitting — App mobile boxing"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="proj-img-fb" style="display:none; background:#1a0505;">🥊</div>
-          </div>
-          <div class="proj-body">
-            <div class="proj-cat">Mobile App · Softr.io</div>
-            <h3 class="proj-title">Hitting</h3>
-            <p class="proj-desc">App de matching entre boxeurs pour organiser des interclub fights. Design system 40+
-              composants, RGPD compliant, déployée en production.</p>
-            <div class="proj-chips">
-              <span class="proj-chip">Softr.io</span>
-              <span class="proj-chip">Airtable</span>
-              <span class="proj-chip">Figma</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- GigiRH -->
-        <div class="proj-card">
-          <div class="proj-img">
-            <img src="GigiRhCover.png" alt="GigiRH — Site web RH"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="proj-img-fb" style="display:none; background:#050a15;">💼</div>
-          </div>
-          <div class="proj-body">
-            <div class="proj-cat">Web Design · Front-End</div>
-            <h3 class="proj-title">GigiRH</h3>
-            <p class="proj-desc">Site web RH conçu sur Figma, moderne et accessible. Audit accessibilité WCAG complet,
-              déployé sur Wix.</p>
-            <div class="proj-chips">
-              <span class="proj-chip">Figma</span>
-              <span class="proj-chip">Wix</span>            
-            </div>
-          </div>
-        </div>
-
-        <!-- Amoki -->
-        <div class="proj-card">
-          <div class="proj-img">
-            <img src="MockupAmoki.png" alt="Amoki Éditions — App audiobooks"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="proj-img-fb" style="display:none; background:#100a00;">📚</div>
-          </div>
-          <div class="proj-body">
-            <div class="proj-cat">iOS App · UX/UI Design</div>
-            <h3 class="proj-title">Amoki Éditions</h3>
-            <p class="proj-desc">App audiobooks iOS. 15 wireframes, 8 prototypes interactifs. Le design a convaincu les
-              investisseurs et la subvention obtenue.</p>
-            <div class="proj-chips">
-              <span class="proj-chip">15 wireframes</span>
-              <span class="proj-chip">8 prototypes</span>
-              <span class="proj-chip">Subvention ✓</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
+       <!-- Hitting -->
+<div class="proj-card">
+  <div class="proj-img">
+    <img src="HittingCover.webp" alt="Hitting — App mobile boxing"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="proj-img-fb" style="display:none; background:#1a0505;">🥊</div>
+  </div>
+  <div class="proj-body">
+    <div class="proj-cat">Mobile App · Softr.io</div>
+    <h3 class="proj-title">Hitting</h3>
+    <p class="proj-desc">App de matching entre boxeurs pour organiser des interclub fights. Design system 40+
+      composants, RGPD compliant, déployée en production.</p>
+    <div class="proj-chips">
+      <span class="proj-chip">Softr.io</span>
+      <span class="proj-chip">Airtable</span>
+      <span class="proj-chip">Figma</span>
     </div>
+    <a href="https://hitting.fr/" target="_blank" class="proj-link">Voir le projet →</a>
+  </div>
+</div>
+
+   <!-- GigiRH -->
+<div class="proj-card">
+  <div class="proj-img">
+    <img src="GigiRhCover.png" alt="GigiRH — Site web RH"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="proj-img-fb" style="display:none; background:#050a15;">💼</div>
+  </div>
+  <div class="proj-body">
+    <div class="proj-cat">Web Design · Front-End</div>
+    <h3 class="proj-title">GigiRH</h3>
+    <p class="proj-desc">Site web RH conçu sur Figma, moderne et accessible. Audit accessibilité WCAG complet,
+      déployé sur Wix.</p>
+    <div class="proj-chips">
+      <span class="proj-chip">Figma</span>
+      <span class="proj-chip">Wix</span>            
+    </div>
+    <a href="https://www.figma.com/design/cIOMEtv4sQZdzsE5dJZWNA/Design-system-Gigi-rh?node-id=7-11&t=uvy2ww1N7fD4VghY-1" target="_blank" class="proj-link">Voir le design →</a>
+  </div>
+</div>
+
+      <!-- Amoki -->
+<div class="proj-card">
+  <div class="proj-img">
+    <img src="MockupAmoki.png" alt="Amoki Éditions — App audiobooks"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="proj-img-fb" style="display:none; background:#100a00;">📚</div>
+  </div>
+  <div class="proj-body">
+    <div class="proj-cat">iOS App · UX/UI Design</div>
+    <h3 class="proj-title">Amoki Éditions</h3>
+    <p class="proj-desc">App audiobooks iOS. 15 wireframes, 8 prototypes interactifs. Le design a convaincu les
+      investisseurs et la subvention obtenue.</p>
+    <div class="proj-chips">
+      <span class="proj-chip">15 wireframes</span>
+      <span class="proj-chip">8 prototypes</span>
+      <span class="proj-chip">Subvention ✓</span>
+    </div>
+    <a href="https://www.figma.com/design/8WkIwOBXgCKiMiDE06mGAY/Amoki?node-id=347-1353&t=b7QQU9ddtpI4ohqg-1" target="_blank" class="proj-link">Voir le design →</a>
+  </div>
+</div>
   </section>
 
   <!-- ══ ABOUT ═════════════════════════════════════════════════════════ -->
@@ -1234,17 +1249,17 @@
       <div class="about-grid">
 
         <div class="about-text reveal">
-          <h2>Sociologue,<br><em>développeuse,</em><br>formatrice.</h2>
+          <h2> Master en Socio,<br><em>Autodidacte en code</em><br>Designer UX/UI.</h2>
+          
           <p class="about-p">
-            J'ai commencé par comprendre les gens — Master en Sociologie à Paris-Descartes en 2013.
-            Puis j'ai découvert que <strong>le code et le design sont des outils puissants pour créer du
-              changement</strong>.
-          </p>
-          <p class="about-p">
-            Aujourd'hui je marie ces deux mondes : je conçois des expériences utilisateurs qui partent
-            des vrais besoins, je les code de bout en bout, et je transmets ce que j'ai appris à ceux
-            qui veulent créer.
-          </p>
+  J'ai étudié comment les gens pensent (Socio). J'ai appris à coder (autodidacte). 
+  J'ai maîtrisé le design (Figma, Design Systems). Puis j'ai compris que je voulais transmettre ça.
+</p>
+
+<p class="about-p">
+  Développement web + UX/UI Design. 20+ formations. 200+ apprenants.
+  Je crois pas à l'apprentissage sans faire. On apprend en codant, en designant, en créant.
+</p>
 
           <div class="about-timeline">
             <div class="tl-line"></div>
@@ -1275,6 +1290,9 @@
               <div class="tl-content">
                 <div class="tl-title">Formatrice & Freelance</div>
                 <div class="tl-desc">NDA n°11931240793. En mission.</div>
+                <div class="tl-desc">
+Label École, ISIFA, HETIC, EPSI, INGETIS, CODA, Label Emmaus.
+</div>
               </div>
             </div>
           </div>
@@ -1307,8 +1325,7 @@
           <div class="skills-group">
             <div class="sg-label">Formation</div>
             <div class="sg-badges">
-              <span class="sg-badge">Pédagogie</span>
-              <span class="sg-badge">CPF / OPCO</span>
+              <span class="sg-badge">Pédagogie</span>              
               <span class="sg-badge">Ateliers pratiques</span>
               <span class="sg-badge">Organisme enregistré</span>
             </div>
