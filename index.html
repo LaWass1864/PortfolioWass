@@ -158,6 +158,69 @@
     /* ══════════════════════════════════════════════════ */
     /* ── HERO ─────────────────────────────────────────── */
     /* ══════════════════════════════════════════════════ */
+
+    .hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-left {
+  max-width: 600px;
+}
+
+.hero-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-photo-bg {
+  position: relative;
+  width: 320px;
+  height: 380px;
+  background: linear-gradient(135deg, #FF1493 0%, #00D9FF 50%, #C066FF 100%);
+  border-radius: 60px 60px 80px 60px; /* Formes arrondies asymétriques */
+  padding: 8px;
+  box-shadow: 0 20px 60px rgba(255, 20, 147, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-photo-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 55px 55px 75px 55px;
+  display: block;
+}
+
+/* Mobile */
+@media (max-width: 880px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .hero-photo-bg {
+    width: 280px;
+    height: 340px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-grid {
+    gap: 2rem;
+  }
+
+  .hero-photo-bg {
+    width: 240px;
+    height: 300px;
+  }
+}
     #hero {
       min-height: 100vh;
       display: flex;
@@ -1058,6 +1121,8 @@
 
   <div id="prog"></div>
 
+  
+
   <!-- ══ NAV ══════════════════════════════════════════════════════════ -->
   <nav id="nav">
     <a class="nav-logo" href="#hero">Wassila<span>.</span></a>
@@ -1071,17 +1136,17 @@
 
   <!-- ══ HERO ══════════════════════════════════════════════════════════ -->
   <section id="hero">
-    <div class="container">
-      <div class="hero-inner">
-
-           <h1 class="hero-name">
+  <div class="container">
+    <div class="hero-grid">
+      <!-- GAUCHE: TEXTE -->
+      <div class="hero-left">
+        <h1 class="hero-name">
           <span class="ln"><span>Wassila</span></span>
           <span class="ln"><span>Amoura.</span></span>
         </h1>
 
         <p class="hero-bio">
           Formatrice UX/UI et développeuse créative
-        
         </p>
 
         <div class="hero-actions">
@@ -1102,13 +1167,18 @@
             <div class="hs-num">3<span>+</span></div>
             <div class="hs-lbl">Projets en production</div>
           </div>
-
         </div>
+      </div>
 
+      <!-- DROITE: PHOTO -->
+      <div class="hero-right">
+        <div class="hero-photo-bg">
+          <img src="me.png" alt="Wassila portrait">
+        </div>
       </div>
     </div>
-  </section>
-
+  </div>
+</section>
   <!-- ══ FORMATIONS ════════════════════════════════════════════════════ -->
   <section id="formations">
     <div class="container">
